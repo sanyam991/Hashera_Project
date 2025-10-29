@@ -10,7 +10,6 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        // Hardcoded for testing one file only
         String fileName = "file2.json";
         System.out.println("Processing " + fileName + ":");
 
@@ -23,9 +22,7 @@ public class Main {
 
             JsonObject keysObj = rootObj.getAsJsonObject("keys");
             int n = keysObj.get("n").getAsInt();
-            // int k = keysObj.get("k").getAsInt(); // Not used for constant C
-
-            // Collect roots by parsing base-value to BigInteger
+          
             List<BigInteger> roots = new ArrayList<>();
             Set<String> keySet = rootObj.keySet();
             for (String key : keySet) {
@@ -39,13 +36,12 @@ public class Main {
                 }
             }
 
-            // Compute product of roots using BigInteger
+           
             BigInteger prod = BigInteger.ONE;
             for (BigInteger root : roots) {
                 prod = prod.multiply(root);
             }
 
-            // Constant C = (-1)^n * product
             BigInteger C;
             if (n % 2 == 0) {
                 C = prod;
@@ -53,7 +49,6 @@ public class Main {
                 C = prod.negate();
             }
 
-            // Output the constant C
             System.out.println("The constant C is: " + C);
 
         } catch (IOException e) {
